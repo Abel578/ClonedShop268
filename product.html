@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloned Shop - Products</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- RESET & VARIABLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        :root {
+            --primary-orange: #f28c06;
+            --dark-bg: #140b03;
+            --text-light: #ffffff;
+            --text-muted: #cdbeaf;
+            --outline-color: rgba(242, 140, 6, 0.4);
+        }
+
+        body {
+            background-image: url('Gemini_Generated_Image_uxoxecuxoxecuxox.png'); 
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-light);
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            z-index: 10;
+        }
+
+        .navbar {
+            background-color: var(--primary-orange);
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 12px 35px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            flex-wrap: wrap;
+        }
+
+        .navbar a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: opacity 0.2s ease;
+        }
+
+        .navbar a:hover {
+            opacity: 0.7;
+        }
+
+        /* --- MAIN CONTENT STORE --- */
+        .store-container {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px 20px 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- SÉLECTEUR DE DEVISES --- */
+        .currency-selector {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .currency-item {
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--outline-color);
+            color: var(--primary-orange);
+            padding: 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-align: center;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .currency-item:hover, .currency-item.active {
+            background-color: rgba(242, 140, 6, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .currency-item.active {
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 10px rgba(242, 140, 6, 0.2);
+        }
+
+        /* --- VISUELS DES BILLETS / COUPURES --- */
+        .product-preview {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .banknote-thumbnail {
+            width: 120px;
+            height: auto;
+            opacity: 0.4;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.3s ease, opacity 0.3s ease, border-color 0.3s ease;
+            filter: grayscale(40%);
+        }
+
+        .banknote-thumbnail:hover {
+            opacity: 0.7;
+            transform: scale(1.05);
+        }
+
+        .banknote-thumbnail.main-active {
+            width: 190px;
+            opacity: 1;
+            filter: grayscale(0%);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border-radius: 2px;
+            border-color: var(--primary-orange);
+            cursor: default;
+        }
+        
+        .banknote-thumbnail.main-active:hover {
+            transform: none;
+        }
+
+        /* --- INFOS DU PRODUIT --- */
+        .product-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .product-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+        }
+
+        .product-subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        /* --- OPTIONS DE PRIX --- */
+        .pricing-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 35px;
+        }
+
+        .price-row {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            border: 1px solid var(--outline-color);
+            background: transparent;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .price-row.selected {
+            background-color: var(--primary-orange);
+            color: #000000;
+            border-color: var(--primary-orange);
+        }
+
+        .price-row:hover:not(.selected) {
+            background-color: rgba(242, 140, 6, 0.05);
+            transform: scale(1.01);
+        }
+
+        /* --- BOUTON D'ACTION PRINCIPAL --- */
+        .btn-order {
+            width: 100%;
+            background-color: var(--primary-orange);
+            color: #000000;
+            border: none;
+            padding: 16px;
+            font-size: 1rem;
+            font-weight: 800;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(242, 140, 6, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-order:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(242, 140, 6, 0.5);
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 600px) {
+            .product-preview {
+                gap: 15px;
+            }
+            .banknote-thumbnail {
+                width: 80px;
+            }
+            .banknote-thumbnail.main-active {
+                width: 140px;
+            }
+            .product-title {
+                font-size: 1.8rem;
+            }
+            .price-row {
+                font-size: 0.8rem;
+                padding: 12px 15px;
+            }
+            .navbar {
+                gap: 12px;
+                padding: 10px 15px;
+            }
+            .navbar a {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="product.html">Products</a>
+            <a href="built on safety.html">Built On Safety</a>
+            <a href="quality check.html">Quality Check</a>
+            <a href="contact.html">Contact</a>
+            <a href="review.html">Reviews</a>
+        </nav>
+    </header>
+
+    <main class="store-container">
+        
+        <section class="currency-selector" id="currencySelector">
+            <div class="currency-item active" data-currency="EUR">EUR</div>
+            <div class="currency-item" data-currency="USD">USD</div>
+            <div class="currency-item" data-currency="GBP">GBP</div>
+            <div class="currency-item" data-currency="CAD">CAD</div>
+            <div class="currency-item" data-currency="SEK">SEK</div>
+            <div class="currency-item" data-currency="CHF">CHF</div>
+            <div class="currency-item" data-currency="PLN">PLN</div>
+        </section>
+
+        <section class="product-preview">
+            <img class="banknote-thumbnail" id="note0" data-index="0" src="eur_10.png" alt=>
+            <img class="banknote-thumbnail main-active" id="note1" data-index="1" src="eur_20.png" >
+            <img class="banknote-thumbnail" id="note2" data-index="2" src="eur_50.png">
+        </section>
+
+        <section class="product-info">
+            <h1 class="product-title" id="productTitle">20€ Banknotes</h1>
+            <p class="product-subtitle">AA+ Grade Banknotes</p>
+        </section>
+
+        <section class="pricing-container">
+            <div class="price-row selected">
+                <span class="value-label" id="val0">Value: 1000€</span>
+                <span class="price-label">Price: €100</span>
+            </div>
+            <div class="price-row">
+                <span class="value-label" id="val1">Value: 2250€</span>
+                <span class="price-label">Price: €200</span>
+            </div>
+            <div class="price-row">
+                <span class="value-label" id="val2">Value: 3750€</span>
+                <span class="price-label">Price: €300</span>
+            </div>
+            <div class="price-row">
+                <span class="value-label" id="val3">Value: 5000€</span>
+                <span class="price-label">Price: €400</span>
+            </div>
+        </section>
+
+        <button class="btn-order">Order Now</button>
+
+    </main>
+
+    <script>
+        // --- BASE DE DONNÉES DES IMAGES ET CONFIGURATIONS DE COUPURES ---
+        // Remplacez les chemins d'accès (ex: 'eur_10.png') par vos propres fichiers d'images.
+        const storeData = {
+            EUR: {
+                symbol: '€',
+                notes: [
+                    { value: '20', img: 'product22.png', label: '20€ Banknotes' },
+                    { value: '50', img: 'product55.png', label: '50€ Banknotes' },
+                    { value: '100', img: 'product1010.png', label: '100€ Banknotes' }
+                ],
+                bundles: [1000, 2250, 3750, 5000]
+            },
+            USD: {
+                symbol: '$',
+                notes: [
+                    { value: '20', img: 'productdol20.png', label: '$20 Banknotes' },
+                    { value: '100', img: 'productdol100.png', label: '$50 Banknotes' },
+                    { value: '200', img: 'Gemini_Generated_Image_s5al5ns5al5ns5al.png', label: 'Empty' } 
+                  
+                ],
+                bundles: [1000, 2500, 5000, 10000]
+            },
+            GBP: {
+                symbol: '£',
+                notes: [
+                    { value: '10', img: 'productgbp10.png', label: '£10 Banknotes' },
+                    { value: '20', img: 'productgbp20.png', label: '£20 Banknotes' },
+                    { value: '200', img: 'Gemini_Generated_Image_s5al5ns5al5ns5al.png', label: 'Empty' } 
+                    
+                ],
+                bundles: [1000, 2000, 4000, 6000]
+            },
+            CAD: {
+                symbol: '$',
+                notes: [
+                 
+                    { value: '50', img: 'productcad50.png', label: '50$ CAD Banknotes' },
+                    { value: '100', img: 'productcad100.png', label: '100$ CAD Banknotes' },
+                    { value: '200', img: 'Gemini_Generated_Image_s5al5ns5al5ns5al.png', label: 'Empty' } 
+                ],
+                bundles: [1000, 2500, 5000, 10000]
+            },
+            SEK: {
+                symbol: 'kr',
+                notes: [
+                    { value: '100', img: 'productswe100.png', label: '100kr Banknotes' },
+                    { value: '200', img: 'productswe200.png', label: '200kr Banknotes' },
+                    { value: '500', img: 'productswe500.png', label: '500kr Banknotes' }
+                ],
+                bundles: [5000, 10000, 20000, 50000]
+            },
+            CHF: {
+                symbol: 'CHF',
+                notes: [
+                    { value: '50', img: 'productswiss50.png', label: '20 CHF Banknotes' },
+                    { value: '100', img: 'chf100newphoto.png', label: '50 CHF Banknotes' },
+                    { value: '200', img: 'Gemini_Generated_Image_s5al5ns5al5ns5al.png', label: 'Empty' }     
+                ],
+                bundles: [1000, 2000, 5000, 10000]
+            },
+            PLN: {
+                symbol: 'zł',
+                notes: [
+                    { value: '100', img: 'productzlo200.png', label: '200zł Banknotes' },
+                    { value: '100', img: 'productzlo100.png', label: '100zł Banknotes' },
+                    { value: '200', img: 'Gemini_Generated_Image_s5al5ns5al5ns5al.png', label: 'Empty' }  
+                ],
+                bundles: [2000, 5000, 10000, 20000]
+            }
+        };
+
+        let currentCurrency = 'EUR';
+        let currentNoteIndex = 1; // Par défaut index 1 (la case du milieu)
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const currencyItems = document.querySelectorAll('.currency-item');
+            const thumbnails = document.querySelectorAll('.banknote-thumbnail');
+            const priceRows = document.querySelectorAll('.price-row');
+
+            // Mettre à jour l'interface selon la devise et la coupure choisie
+            function updateStoreDisplay() {
+                const data = storeData[currentCurrency];
+                
+                // 1. Mettre à jour les 3 images des coupures
+                thumbnails.forEach((thumb, i) => {
+                    thumb.src = data.notes[i].img;
+                    thumb.alt = data.notes[i].label;
+                    
+                    // Gérer la classe active visuelle
+                    if (i === currentNoteIndex) {
+                        thumb.classList.add('main-active');
+                    } else {
+                        thumb.classList.remove('main-active');
+                    }
+                });
+
+                // 2. Mettre à jour le titre textuel principal
+                document.getElementById('productTitle').innerText = data.notes[currentNoteIndex].label;
+
+                // 3. Mettre à jour la grille de valeurs selon la devise choisie
+                data.bundles.forEach((val, i) => {
+                    document.getElementById(`val${i}`).innerText = `Value: ${val}${data.symbol}`;
+                });
+            }
+
+            // Événement d'interactivité au clic sur les devises
+            currencyItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    currencyItems.forEach(r => r.classList.remove('active'));
+                    item.classList.add('active');
+                    
+                    currentCurrency = item.getAttribute('data-currency');
+                    updateStoreDisplay();
+                });
+            });
+
+            // Événement d'interactivité au clic sur les images des coupures
+            thumbnails.forEach(thumb => {
+                thumb.addEventListener('click', () => {
+                    currentNoteIndex = parseInt(thumb.getAttribute('data-index'));
+                    updateStoreDisplay();
+                });
+            });
+
+            // Événement d'interactivité sur les lignes de prix (sélection)
+            priceRows.forEach(row => {
+                row.addEventListener('click', () => {
+                    priceRows.forEach(r => r.classList.remove('selected'));
+                    row.classList.add('selected');
+                });
+            });
+
+            // Initialisation de l'affichage de départ
+            updateStoreDisplay();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloned Shop - Accueil</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- RESET & VARIABLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        :root {
+            --primary-orange: #f28c06;
+            --dark-bg: #140b03;
+            --text-light: #ffffff;
+            --text-muted: #cdbeaf;
+        }
+
+        body {
+            /* Image de fond */
+            background-image: url('Gemini_Generated_Image_uxoxecuxoxecuxox.png'); 
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            
+            /* Par défaut sur grand écran : l'arrière-plan reste fixe */
+            background-attachment: fixed;
+            
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            font-weight: bold;
+        }
+
+        /* Effet de lignes diagonales en arrière-plan */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(30deg, transparent 40%, rgba(242, 140, 6, 0.03) 45%, rgba(242, 140, 6, 0.03) 55%, transparent 60%);
+            background-size: 200% 200%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            z-index: 10;
+        }
+
+        .navbar {
+            background-color: var(--primary-orange);
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 12px 35px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            flex-wrap: wrap;
+        }
+
+        .navbar a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: opacity 0.2s ease;
+        }
+
+        .navbar a:hover {
+            opacity: 0.7;
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            width: 100%;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 50px;
+            z-index: 1;
+        }
+
+        /* --- LEFT CONTENT --- */
+        .content-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary-orange);
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+
+        /* BUTTONS */
+        .btn-shop {
+            background-color: var(--primary-orange);
+            color: #000000;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: fit-content;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(242, 140, 6, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-container-secondary {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            margin-bottom: 40px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-orange);
+            border: 2px solid var(--primary-orange);
+            padding: 10px 22px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+            transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+        }
+       .btn-outline a {
+            color: var(--primary-orange);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: opacity 0.2s ease;}
+
+        /* Effets de survol (Léger Up) */
+        .btn-shop:hover, .btn-outline:hover, .tag:hover {
+            transform: translateY(-4px);
+        }
+        
+        .btn-shop:hover {
+            box-shadow: 0 6px 20px rgba(242, 140, 6, 0.4);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(242, 140, 6, 0.1);
+        }
+
+        /* FEATURES SECTION */
+        .features-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .features-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            max-width: 500px;
+        }
+
+        .tags-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background-color: rgba(242, 140, 6, 0.15);
+            border: 1px solid rgba(242, 140, 6, 0.3);
+            color: var(--primary-orange);
+            padding: 8px 16px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 6px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        /* --- RIGHT CONTENT --- */
+        .content-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .image-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: floating 4s ease-in-out infinite;
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.7));
+        }
+
+        .money-graphics {
+            width: 100%;
+            max-width: 420px;
+            height: auto;
+            object-fit: contain; /* S'assure que votre image garde ses proportions */
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes floating {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 900px) {
+            body {
+                /* FORCE L'IMAGE À SCROLLER AVEC LA PAGE SUR MOBILE/ANDROID */
+                background-attachment: scroll !important;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+                padding-top: 20px;
+            }
+
+            /* FORCE L'IMAGE (CONTENT-RIGHT) À PASSER EN PREMIER (EN HAUT) */
+            .content-right {
+                order: -1; 
+            }
+
+            .content-left {
+                order: 2;
+                align-items: center;
+            }
+
+            .btn-shop, .btn-container-secondary, .tags-container {
+                justify-content: center;
+            }
+
+            .brand-title {
+                font-size: 2.8rem;
+            }
+            
+            .money-graphics {
+                max-width: 320px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                gap: 15px;
+                padding: 10px 20px;
+            }
+            .navbar a {
+                font-size: 0.8rem;
+            }
+            .brand-title {
+                font-size: 3.2rem;
+            }
+            .btn-container-secondary {
+                flex-direction: column;
+                width: 100%;
+            }
+            .btn-outline, .btn-shop {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="product.html">Products</a>
+            <a href="built on safety.html">Built On Safety</a>
+            <a href="quality check.html">Quality Check</a>
+            <a href="contact.html">Contact</a>
+            <a href="review.html">Reviews</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        
+        
+
+        <section class="content-left">
+            <h1 class="brand-title">Cloned Shop</h1>
+            <p class="hero-desc">Consistent quality, reliable results—every time, every product.</p>
+            
+            <button class="btn-shop">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+                </svg>
+                Shop Now
+            </button>
+
+            <div class="btn-container-secondary">
+                <button class="btn-outline">
+                    <a href="quality check.html"> Quality Check</a> 
+                    <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
+                </button>
+                <button class="btn-outline">
+                    <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M8 .5c-.662 0-1.77.249-2.813.515a14.071 14.071 0 0 0-3.3 1.255.5.5 0 0 0-.242.434c0 5.295 2.138 9.67 6.128 12.336a.5.5 0 0 0 .534 0c3.99-2.666 6.129-7.04 6.129-12.336a.5.5 0 0 0-.241-.434 14.075 14.075 0 0 0-3.3-1.255C9.77.75 8.663.5 8 .5z"/></svg>
+                     <a href="built on safety.html">Built On Safety</a>
+                </button>
+            </div>
+
+            <h2 class="features-title">Features</h2>
+            <p class="features-desc">Our products are developed through standardized, precision-controlled processes that ensure consistency while mirroring every intricate detail.</p>
+            
+   
+        </section>
+          <section class="content-right">
+            <div class="image-wrapper" id="moneyVisual">
+                <img class="money-graphics" src="money-v2.png" alt="Visual Shop">
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.btn-shop, .btn-outline, .tag');
+            
+            buttons.forEach(button => {
+                button.addEventListener('mousedown', () => {
+                    button.style.transform = 'translateY(-1px) scale(0.98)';
+                });
+                
+                button.addEventListener('mouseup', () => {
+                    button.style.transform = 'translateY(-4px) scale(1)';
+                });
+
+                button.addEventListener('mouseleave', () => {
+                    button.style.transform = 'none';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

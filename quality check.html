@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="clonedv3.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloned Shop - Quality Check</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #ff9500;
+            --background-primary: #f8f9fa;
+            --background-secondary: #ffffff;
+            --text-primary: #ff9500;
+            --text-nav: #ffffff;
+            --text-secondary: #ff9500;
+            --border-color: #dee2e6;
+            --accent-color: #007bff;
+            --product-card-bg: #ff9500;
+            --product-card-bg-hover: #ff9500;
+            --product-card-border: #ff9500;
+            --product-card-text: #ffffff;
+            --product-card-text-secondary: #ffffff;
+            --product-card-badge-bg: #007bff;
+            --product-card-badge-text: #ff9500;
+            --product-card-icon: #007bff;
+            --gold-primary: #ff9500;
+            --gold-light: #eca746;
+            --gold-dark: #bb7719;
+            --promo-orange: #FF9500;
+        }
+
+        html, body {
+            min-height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: url('Gemini_Generated_Image_uxoxecuxoxecuxox.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .text-sm {
+            color: white;
+        }
+
+        .header-text {
+            color: var(--gold-primary);
+            font-size: 48px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .intro-block {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .content-block {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem auto;
+            max-width: 80%;
+            text-align: left;
+        }
+
+        .content-block h3 {
+            color: var(--gold-primary);
+            font-size: 24px;
+            margin-bottom: 1rem;
+        }
+
+        .content-block ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .content-block ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .content-block ul li:before {
+            content: "✓";
+            color: var(--gold-primary);
+            position: absolute;
+            left: 0;
+        }
+
+        /* QC cards grid */
+        .qc-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .qc-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .note-photos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .note-photo {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .note-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease-out;
+        }
+
+        .note-photo:hover img {
+            transform: scale(1.1);
+        }
+
+        .photo-label {
+            position: absolute;
+            bottom: 6px;
+            left: 6px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #ff9500;
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .note-specs li {
+            padding-left: 0;
+        }
+
+        .note-specs li:before {
+            content: "";
+        }
+
+        /* Video button styling */
+        .video-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(45deg, #ff9500, #eca746);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            margin-top: 10px;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(255, 149, 0, 0.3);
+        }
+
+        .video-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 149, 0, 0.4);
+            background: linear-gradient(45deg, #eca746, #ff9500);
+        }
+
+        .video-button i {
+            font-size: 16px;
+        }
+
+        /* Fullscreen image modal */
+        .image-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .image-modal-overlay.active {
+            display: flex;
+        }
+
+        .image-modal-overlay img {
+            max-width: 95vw;
+            max-height: 95vh;
+            object-fit: contain;
+        }
+
+        .image-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        /* Video modal */
+        .video-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            padding: 20px;
+        }
+
+        .video-modal-overlay.active {
+            display: flex;
+        }
+
+        .video-modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 900px;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .video-modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: #fff;
+            font-size: 32px;
+            cursor: pointer;
+            background: rgba(255, 149, 0, 0.8);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .video-modal-close:hover {
+            background: #ff9500;
+            transform: rotate(90deg);
+        }
+
+        /* Mobile menu button */
+        .menu-toggle-btn {
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-toggle-btn:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 768px) {
+            html, body {
+                overflow-y: auto;
+            }
+
+            body {
+                background-attachment: scroll;
+            }
+
+            nav.rounded-2xl {
+                width: 60% !important;
+                margin-top: 8px !important;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            nav.rounded-2xl .container {
+                padding-left: 8px !important;
+                padding-right: 8px !important;
+                padding-top: 6px !important;
+                padding-bottom: 6px !important;
+            }
+
+            .menu-toggle-btn {
+                padding: 6px 12px;
+            }
+
+            .menu-toggle-btn i {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        AOS.init();
+    </script>
+
+    <!-- Navbar -->
+    <nav class="bg-[#ff9500] shadow-md w-full lg:w-2/5 mx-auto mt-4 rounded-2xl" style="font-family: 'Montserrat', sans-serif;">
+        <div x-data="{ showMobileMenu: false }">
+            <div class="container mx-auto px-4 py-4 flex justify-center items-center">
+                <div class="hidden lg:flex space-x-8">
+                    <a href="index.html" class="text-black hover:text-gray-800 transition-all text-center" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Home</a>
+                    <a href="product.html" class="text-black hover:text-gray-800 transition-all text-center" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Products</a>
+                    <a href="built on safety.html" class="text-black hover:text-gray-800 transition-all text-center" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Built On Safety</a>
+                    <a href="quality check.html" class="text-black hover:text-gray-800 transition-all text-center" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Quality Check</a>
+                    <a href="contact.html" class="text-black hover:text-gray-800 transition-all text-center" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Contact</a>
+                    <a href="review.html" class="text-black hover:text-gray-800 transition-all text-center" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Reviews</a>
+                </div>
+                <div class="lg:hidden w-full flex justify-center">
+                    <button @click="showMobileMenu = !showMobileMenu" class="focus:outline-none menu-toggle-btn w-full">
+                        <i class="fas fa-bars text-xl text-black"></i>
+                    </button>
+                </div>
+            </div>
+            <div
+                x-show="showMobileMenu"
+                x-transition
+                class="lg:hidden bg-white px-4 py-2 space-y-2 rounded-b-2xl max-h-[60vh] overflow-y-auto"
+            >
+                <a href="index.html" class="block text-black hover:text-gray-800 text-center">Home</a>
+                <a href="products.html" class="block text-black hover:text-gray-800 text-center">Products</a>
+                <a href="builtonsafety.html" class="block text-black hover:text-gray-800 text-center">Built On Safety</a>
+                <a href="qualitycheck.html" class="block text-black hover:text-gray-800 text-center">Quality Check</a>
+                <a href="contact.html" class="block text-black hover:text-gray-800 text-center">Contact</a>
+                <a href="reviews.html" class="block text-black hover:text-gray-800 text-center">Reviews</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="min-h-[80vh] flex flex-col items-center justify-center py-10">
+        <div class="container mx-auto max-w-7xl px-4">
+            <h1 class="header-text">Quality Check</h1>
+
+            <div class="intro-block">
+                Cloned Shop QC - streamlines inspection processes for reviewing photos, video content, and performing additional quality control on every banknote before shipping.
+            </div>
+
+            <!-- EUR -->
+            <div class="content-block mt-6">
+                <h3>Euro (EUR)</h3>
+                <div class="qc-grid">
+                    <!-- 10 EUR -->
+                    <div>
+                        <h4 class="text-xl mb-2 text-[#ff9500]">10 EUR</h4>
+                        <div class="note-photos mb-2">
+                            <div class="note-photo">
+                                <img src="eur10f.jpg" alt="10 EUR front">
+                                <span class="photo-label">Front</span>
+                            </div>
+                            <div class="note-photo">
+                                <img src="eur10b.jpg" alt="10 EUR back">
+                                <span class="photo-label">Back</span>
+                            </div>
+                        </div>
+                        <ul class="note-specs">
+                            <li>Width: 127 mm</li>
+                            <li>Height: 67 mm</li>
+                            <li>Weight: 0.92 g</li>
+                            <li>Material: 100% cotton fiber paper</li>
+                            <li>Thickness: ~0.11 mm</li>
+                        </ul>
+                       
+                    </div>
+
+                    <!-- 20 EUR -->
+                    <div>
+                        <h4 class="text-xl mb-2 text-[#ff9500]">20 EUR</h4>
+                        <div class="note-photos mb-2">
+                            <div class="note-photo">
+                                <img src="eur20f.jpg" alt="20 EUR front">
+                                <span class="photo-label">Front</span>
+                            </div>
+                            <div class="note-photo">
+                                <img src="eur20b.jpg" alt="20 EUR back">
+                                <span class="photo-label">Back</span>
+                            </div>
+                        </div>
+                        <ul class="note-specs">
+                            <li>Width: 133 mm</li>
+                            <li>Height: 72 mm</li>
+                            <li>Weight: 1.00 g</li>
+                            <li>Material: 100% cotton fiber paper</li>
+                            <li>Thickness: ~0.11 mm</li>
+                        </ul>
+                        
+                    </div>
+
+                    <!-- 50 EUR -->
+                    <div>
+                        <h4 class="text-xl mb-2 text-[#ff9500]">50 EUR</h4>
+                        <div class="note-photos mb-2">
+                            <div class="note-photo">
+                                <img src="eur50f.jpg" alt="50 EUR front">
+                                <span class="photo-label">Front</span>
+                            </div>
+                            <div class="note-photo">
+                                <img src="eur50b.jpg" alt="50 EUR back">
+                                <span class="photo-label">Back</span>
+                            </div>
+                        </div>
+                        <ul class="note-specs">
+                            <li>Width: 140 mm</li>
+                            <li>Height: 77 mm</li>
+                            <li>Weight: 1.12 g</li>
+                            <li>Material: 100% cotton fiber paper</li>
+                            <li>Thickness: ~0.11 mm</li>
+                        </ul>
+                    </div>
+
+                    <!-- 100 EUR -->
+                    <div>
+                        <h4 class="text-xl mb-2 text-[#ff9500]">100 EUR</h4>
+                        <div class="note-photos mb-2">
+                            <div class="note-photo">
+                                <img src="eur100f.jpg" alt="100 EUR front">
+                                <span class="photo-label">Front</span>
+                            </div>
+                            <div class="note-photo">
+                                <img src="eur100b.jpg" alt="100 EUR back">
+                                <span class="photo-label">Back</span>
+                            </div>
+                        </div>
+                        <ul class="note-specs">
+                            <li>Width: 147 mm</li>
+                            <li>Height: 82 mm</li>
+                            <li>Weight: 1.20 g</li>
+                            <li>Material: 100% cotton fiber paper</li>
+                            <li>Thickness: ~0.11 mm</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GBP -->
+            <div class="content-block">
+                <h3>British Pound (GBP)</h3>
+                <div class="qc-grid">
+                    <!-- 10 GBP -->
+                    <div>
+                        <h4 class="text-xl mb-2 text-[#ff9500]">10 GBP</h4>
+                        <div class="note-photos mb-2">
+                            <div class="note-photo">
+                                <img src="gbp10f.jpg" alt="10 GBP front">
+                                <span class="photo-label">Front</span>
+                            </div>
+                            <div class="note-photo">
+                                <img src="gbp10b.jpg" alt="10 GBP back">
+                                <span class="photo-label">Back</span>
+                            </div>
+                        </div>
+                        <ul class="note-specs">
+                            <li>Width: 132 mm</li>
+                            <li>Height: 69 mm</li>
+                            <li>Weight: 0.92 g</li>
+                            <li>Material: Polymer</li>
+                            <li>Thickness: ~0.125 mm</li>
+                        </ul>
+                    </div>
+
+                    <!-- 20 GBP -->
+                    <div>
+                        <h4 class="text-xl mb-2 text-[#ff9500]">20 GBP</h4>
+                        <div class="note-photos mb-2">
+                            <div class="note-photo">
+                                <img src="gbp20f.jpg" alt="20 GBP front">
+                                <span class="photo-label">Front</span>
+                            </div>
+                            <div class="note-photo">
+                                <img src="gbp20b.jpg" alt="20 GBP back">
+                                <span class="photo-label">Back</span>
+                            </div>
+                        </div>
+                        <ul class="note-specs">
+                            <li>Width: 139 mm</li>
+                            <li>Height: 73 mm</li>
+                            <li>Weight: 1.00 g</li>
+                            <li>Material: Polymer</li>
+                            <li>Thickness: ~0.125 mm</li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHF -->
+            <div class="content-block">
+                <h3>Swiss Franc (CHF)</h3>
+                <div class="qc-grid">
+                    <!-- 50 CHF -->
+                    <div>
+                        <h4 class="text-xl mb-2 text-[#ff9500]">50 CHF</h4>
+                        <div class="note-photos mb-2">
+                            <div class="note-photo">
+                                <img src="chf50f.jpg" alt="50 CHF front">
+                                <span class="photo-label">Front</span>
+                            </div>
+                            <div class="note-photo">
+                                <img src="chf50b.jpg" alt="50 CHF back">
+                                <span class="photo-label">Back</span>
+                            </div>
+                        </div>
+                        <ul class="note-specs">
+                            <li>Width: 70 mm</li>
+                            <li>Height: 137 mm</li>
+                            <li>Weight: 0.92 g</li>
+                            <li>Material: 100% cotton fiber paper</li>
+                            <li>Thickness: ~0.11 mm</li>
+                        </ul>
+                        
+                    </div>
+
+                    <!-- 100 CHF -->
+                    <div>
+                        <h4 class="text-xl mb-2 text-[#ff9500]">100 CHF</h4>
+                        <div class="note-photos mb-2">
+                            <div class="note-photo">
+                                <img src="chf100f.jpg" alt="100 CHF front">
+                                <span class="photo-label">Front</span>
+                            </div>
+                            <div class="note-photo">
+                                <img src="chf100b.jpg" alt="100 CHF back">
+                                <span class="photo-label">Back</span>
+                            </div>
+                        </div>
+                        <ul class="note-specs">
+                            <li>Width: 70 mm</li>
+                            <li>Height: 144 mm</li>
+                            <li>Weight: 1.02 g</li>
+                            <li>Material: 100% cotton fiber paper</li>
+                            <li>Thickness: ~0.11 mm</li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- PLN -->
+            <div class="content-block">
+                <h3>Polish Zloty (PLN)</h3>
+                <div class="qc-grid">
+                    <!-- 100 PLN -->
+                    <div>
+                        <h4 class="text-xl mb-2 text-[#ff9500]">100 PLN</h4>
+                        <div class="note-photos mb-2">
+                            <div class="note-photo">
+                                <img src="pln100f.jpg" alt="100 PLN front">
+                                <span class="photo-label">Front</span>
+                            </div>
+                            <div class="note-photo">
+                                <img src="pln100b.jpg" alt="100 PLN back">
+                                <span class="photo-label">Back</span>
+                            </div>
+                        </div>
+                        <ul class="note-specs">
+                            <li>Width: 138 mm</li>
+                            <li>Height: 69 mm</li>
+                            <li>Weight: 1.0 g</li>
+                            <li>Material: 100% cotton fiber paper</li>
+                            <li>Thickness: 0.11 mm</li>
+                        </ul>
+                        
+                    </div>
+
+                    <!-- 200 PLN -->
+                    <div>
+                        <h4 class="text-xl mb-2 text-[#ff9500]">200 PLN</h4>
+                        <div class="note-photos mb-2">
+                            <div class="note-photo">
+                                <img src="pln200f.jpg" alt="200 PLN front">
+                                <span class="photo-label">Front</span>
+                            </div>
+                            <div class="note-photo">
+                                <img src="pln200b.jpg" alt="200 PLN back">
+                                <span class="photo-label">Back</span>
+                            </div>
+                        </div>
+                        <ul class="note-specs">
+                            <li>Width: 144 mm</li>
+                            <li>Height: 72 mm</li>
+                            <li>Weight: 1.05 g</li>
+                            <li>Material: 100% cotton fiber paper</li>
+                            <li>Thickness: 0.11 mm</li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- CAD -->
+            <div class="content-block">
+                <h3>Canadian Dollar (CAD)</h3>
+                <div class="qc-grid">
+                    <!-- 50 CAD -->
+                    <div>
+                        <h4 class="text-xl mb-2 text-[#ff9500]">50 CAD</h4>
+                        <div class="note-photos mb-2">
+                            <div class="note-photo">
+                                <img src="cad50f.jpg" alt="50 CAD front">
+                                <span class="photo-label">Front</span>
+                            </div>
+                            <div class="note-photo">
+                                <img src="cad50b.jpg" alt="50 CAD back">
+                                <span class="photo-label">Back</span>
+                            </div>
+                        </div>
+                        <ul class="note-specs">
+                            <li>Width: 152.4 mm</li>
+                            <li>Height: 69.85 mm</li>
+                            <li>Weight: 0.93 g</li>
+                            <li>Material: Polymer</li>
+                            <li>Thickness: ~0.11 mm</li>
+                        </ul>
+                       
+                    </div>
+
+                    <!-- 100 CAD -->
+                    <div>
+                        <h4 class="text-xl mb-2 text-[#ff9500]">100 CAD</h4>
+                        <div class="note-photos mb-2">
+                            <div class="note-photo">
+                                <img src="cad100f.jpg" alt="100 CAD front">
+                                <span class="photo-label">Front</span>
+                            </div>
+                            <div class="note-photo">
+                                <img src="cad100b.jpg" alt="100 CAD back">
+                                <span class="photo-label">Back</span>
+                            </div>
+                        </div>
+                        <ul class="note-specs">
+                            <li>Width: 152.4 mm</li>
+                            <li>Height: 69.85 mm</li>
+                            <li>Weight: 0.93 g</li>
+                            <li>Material: Polymer</li>
+                            <li>Thickness: ~0.11 mm</li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!-- USD -->
+            <div class="content-block">
+                <h3>US Dollar (USD)</h3>
+                <div class="qc-grid">
+                    <!-- 20 USD -->
+                    <div>
+                        <h4 class="text-xl mb-2 text-[#ff9500]">20 USD</h4>
+                        <div class="note-photos mb-2">
+                            <div class="note-photo">
+                                <img src="usd20f.jpg" alt="20 USD front">
+                                <span class="photo-label">Front</span>
+                            </div>
+                            <div class="note-photo">
+                                <img src="usd20b.jpg" alt="20 USD back">
+                                <span class="photo-label">Back</span>
+                            </div>
+                        </div>
+                        <ul class="note-specs">
+                            <li>Width: 156 mm</li>
+                            <li>Height: 66.3 mm</li>
+                            <li>Weight: 1.0 g</li>
+                            <li>Material: 75% cotton, 25% linen</li>
+                            <li>Thickness: ~0.11 mm</li>
+                        </ul>
+                       
+                    </div>
+
+                    <!-- 100 USD -->
+                    <div>
+                        <h4 class="text-xl mb-2 text-[#ff9500]">100 USD</h4>
+                        <div class="note-photos mb-2">
+                            <div class="note-photo">
+                                <img src="usd100f.jpg" alt="100 USD front">
+                                <span class="photo-label">Front</span>
+                            </div>
+                            <div class="note-photo">
+                                <img src="usd100b.jpg" alt="100 USD back">
+                                <span class="photo-label">Back</span>
+                            </div>
+                        </div>
+                        <ul class="note-specs">
+                            <li>Width: 156 mm</li>
+                            <li>Height: 66.3 mm</li>
+                            <li>Weight: 1.0 g</li>
+                            <li>Material: 75% cotton, 25% linen</li>
+                            <li>Thickness: ~0.11 mm</li>
+                        </ul>
+                       
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEK -->
+            <div class="content-block mb-8">
+                <h3>Swedish Krona (SEK)</h3>
+                <div class="qc-grid">
+                    <!-- 100 SEK -->
+                    <div>
+                        <h4 class="text-xl mb-2 text-[#ff9500]">100 SEK</h4>
+                        <div class="note-photos mb-2">
+                            <div class="note-photo">
+                                <img src="sek100f.jpg" alt="100 SEK front">
+                                <span class="photo-label">Front</span>
+                            </div>
+                            <div class="note-photo">
+                                <img src="sek100b.jpg" alt="100 SEK back">
+                                <span class="photo-label">Back</span>
+                            </div>
+                        </div>
+                        <ul class="note-specs">
+                            <li>Width: 133 mm</li>
+                            <li>Height: 66 mm</li>
+                            <li>Weight: 1.0 g</li>
+                            <li>Material: 100% cotton</li>
+                            <li>Thickness: ~0.11 mm</li>
+                        </ul>
+                        
+                    </div>
+
+                    <!-- 200 SEK -->
+                    <div>
+                        <h4 class="text-xl mb-2 text-[#ff9500]">200 SEK</h4>
+                        <div class="note-photos mb-2">
+                            <div class="note-photo">
+                                <img src="sek200f.jpg" alt="200 SEK front">
+                                <span class="photo-label">Front</span>
+                            </div>
+                            <div class="note-photo">
+                                <img src="sek200b.jpg" alt="200 SEK back">
+                                <span class="photo-label">Back</span>
+                            </div>
+                        </div>
+                        <ul class="note-specs">
+                            <li>Width: 140 mm</li>
+                            <li>Height: 66 mm</li>
+                            <li>Weight: 1.0 g</li>
+                            <li>Material: 100% cotton</li>
+                            <li>Thickness: ~0.11 mm</li>
+                        </ul>
+                        
+                    </div>
+
+                    <!-- 500 SEK -->
+                    <div>
+                        <h4 class="text-xl mb-2 text-[#ff9500]">500 SEK</h4>
+                        <div class="note-photos mb-2">
+                            <div class="note-photo">
+                                <img src="sek500f.jpg" alt="500 SEK front">
+                                <span class="photo-label">Front</span>
+                            </div>
+                            <div class="note-photo">
+                                <img src="sek500b.jpg" alt="500 SEK back">
+                                <span class="photo-label">Back</span>
+                            </div>
+                        </div>
+                        <ul class="note-specs">
+                            <li>Width: 147 mm</li>
+                            <li>Height: 66 mm</li>
+                            <li>Weight: 1.1 g</li>
+                            <li>Material: 100% cotton</li>
+                            <li>Thickness: ~0.12 mm</li>
+                        </ul>
+                        
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Fullscreen image modal -->
+    <div id="imageModal" class="image-modal-overlay">
+        <span class="image-modal-close">&times;</span>
+        <img id="imageModalImg" src="" alt="">
+    </div>
+
+    <!-- Video modal -->
+    <div id="videoModal" class="video-modal-overlay">
+        <div class="video-modal-content">
+            <span class="video-modal-close" onclick="closeVideoModal()">&times;</span>
+            <iframe id="videoIframe" src="" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        // Image modal
+        document.addEventListener("DOMContentLoaded", () => {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('imageModalImg');
+            const closeBtn = document.querySelector('.image-modal-close');
+
+            document.querySelectorAll('.note-photo img').forEach(img => {
+                img.addEventListener('click', () => {
+                    modalImg.src = img.src;
+                    modal.classList.add('active');
+                });
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal || e.target === closeBtn) {
+                    modal.classList.remove('active');
+                    modalImg.src = '';
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    modal.classList.remove('active');
+                    modalImg.src = '';
+                }
+            });
+        });
+
+        // Video modal
+        function openVideoModal(videoId) {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('videoIframe');
+            iframe.src = `https://streamable.com/e/${videoId}`;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('videoIframe');
+            iframe.src = '';
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('videoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeVideoModal();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+            }
+        });
+    </script>
+</body>
+</html>

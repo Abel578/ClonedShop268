@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="clonedv3.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloned Shop - Contact</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold-primary: #ff9500;
+            --gold-light: #eca746;
+            --gold-dark: #bb7719;
+        }
+
+        html, body {
+            min-height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: url('Gemini_Generated_Image_uxoxecuxoxecuxox.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--gold-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .jpRZhs {
+            background: linear-gradient(145deg, rgb(22 22 32 / 40%), rgb(2 2 2 / 40%));
+            border-radius: 24px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 15px 40px;
+            border: 1px solid #d4af37;
+            padding: 2rem;
+            text-align: center;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .card-logo img {
+            width: 120px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .card-title {
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--gold-light), var(--gold-primary), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+        }
+
+        .card-subtitle {
+            color: #a3a3a3;
+            font-size: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .card-members {
+            background: #eca746;
+            color: #000;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .hero-buttons a {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            letter-spacing: 1px;
+            width: 100%;
+            max-width: 300px;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+
+        .join-telegram {
+            background: linear-gradient(45deg, var(--gold-dark), var(--gold-primary));
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(212, 126, 55, 0.3);
+        }
+
+        .join-telegram:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 126, 55, 0.3);
+            background: linear-gradient(45deg, var(--gold-light), var(--gold-primary));
+        }
+
+        .join-telegram svg {
+            margin-right: 0.5rem;
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Mobile menu button */
+        .menu-toggle-btn {
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-toggle-btn:active { transform: scale(0.95); }
+
+        @media (max-width: 768px) {
+            html, body { overflow-y: auto; }
+
+            body { background-attachment: scroll; }
+
+            nav.rounded-2xl {
+                width: 60% !important;
+                margin-top: 8px !important;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            nav.rounded-2xl .container {
+                padding-left: 8px !important;
+                padding-right: 8px !important;
+                padding-top: 6px !important;
+                padding-bottom: 6px !important;
+            }
+
+            .menu-toggle-btn { padding: 6px 12px; }
+            .menu-toggle-btn i { font-size: 16px; }
+
+            .jpRZhs {
+                max-width: 90%;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-buttons a {
+                padding: 10px 18px;
+                font-size: 13px;
+                max-width: 100%;
+            }
+
+            .card-logo img { width: 60px; }
+            .card-title { font-size: 28px; }
+            .card-subtitle { font-size: 0.875rem; }
+            .card-members { font-size: 0.75rem; padding: 0.2rem 0.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        AOS.init();
+    </script>
+
+    <!-- Navbar -->
+    <nav class="bg-[#ff9500] shadow-md w-full lg:w-2/5 mx-auto mt-4 rounded-2xl" style="font-family: 'Montserrat', sans-serif;">
+        <div x-data="{ showMobileMenu: false }">
+            <div class="container mx-auto px-4 py-4 flex justify-center items-center">
+                <div class="hidden lg:flex space-x-8">
+                    <a href="index.html" class="text-black hover:text-gray-800 transition-all text-center" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Home</a>
+                    <a href="product.html" class="text-black hover:text-gray-800 transition-all text-center" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Products</a>
+                    <a href="built on safety.html" class="text-black hover:text-gray-800 transition-all text-center" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Built On Safety</a>
+                    <a href="quality check.html" class="text-black hover:text-gray-800 transition-all text-center" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Quality Check</a>
+                    <a href="contact.html" class="text-black hover:text-gray-800 transition-all text-center" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Contact</a>
+                    <a href="review.html" class="text-black hover:text-gray-800 transition-all text-center" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Reviews</a>
+                </div>
+                <div class="lg:hidden w-full flex justify-center">
+                    <button @click="showMobileMenu = !showMobileMenu" class="focus:outline-none menu-toggle-btn w-full">
+                        <i class="fas fa-bars text-xl text-black"></i>
+                    </button>
+                </div>
+            </div>
+            <div
+                x-show="showMobileMenu"
+                x-transition
+                class="lg:hidden bg-white px-4 py-2 space-y-2 rounded-b-2xl max-h-[60vh] overflow-y-auto"
+            >
+                <a href="index.html" class="block text-black hover:text-gray-800 text-center" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Home</a>
+                <a href="products.html" class="block text-black hover:text-gray-800 text-center" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Products</a>
+                <a href="builtonsafety.html" class="block text-black hover:text-gray-800 text-center" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Built On Safety</a>
+                <a href="qualitycheck.html" class="block text-black hover:text-gray-800 text-center" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Quality Check</a>
+                <a href="contact.html" class="block text-black hover:text-gray-800 text-center" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Contact</a>
+                <a href="reviews.html" class="block text-black hover:text-gray-800 text-center" style="font-family: 'Montserrat', sans-serif; font-weight: 500;">Reviews</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="min-h-[80vh] flex flex-col items-center justify-center py-10">
+        <div class="container mx-auto max-w-7xl px-4 flex items-center justify-center gap-6">
+            <div class="jpRZhs" data-aos="fade-up">
+                <div class="card-logo">
+                    <img alt="Cloned Shop Logo" src="cloned-logo-v3.png">
+                </div>
+                <h1 class="card-title">Cloned Shop™</h1>
+                <div class="card-subtitle">Join Our Community</div>
+                <div class="card-members">+5.000 Members</div>
+                <div class="hero-buttons">
+                    <a href="https://t.me/euro_r4ckz" target="_blank" rel="noopener noreferrer" class="join-telegram">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.04.01-.19-.07-.27-.08-.08-.21-.05-.3-.03-.13.03-2.2 1.4-6.22 4.12-.59.4-1.12.6-1.59.58-.52-.02-1.53-.3-2.28-.54-.92-.31-1.65-.47-1.59-1 .03-.27.28-.54.77-.83 3.03-1.31 5.04-2.18 6.04-2.62 2.88-1.26 3.49-1.48 3.88-1.49 1.33-.04 1.78.96 1 2.89z"></path>
+                        </svg>
+                        Join Telegram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
