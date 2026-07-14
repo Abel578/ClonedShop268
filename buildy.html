@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloned Shop - Conçu pour la sécurité</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- RESET & VARIABLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        :root {
+            --primary-orange: #f28c06;
+            --dark-bg: #140b03;
+            --card-bg: rgba(20, 11, 3, 0.8);
+            --text-light: #ffffff;
+            --text-muted: #cdbeaf;
+            --outline-color: rgba(242, 140, 6, 0.4);
+        }
+
+        body {
+            background-image: url('Gemini_Generated_Image_uxoxecuxoxecuxox.png'); 
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            color: var(--text-light);
+        }
+
+        /* --- BARRE DE NAVIGATION --- */
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            z-index: 10;
+        }
+
+        .navbar {
+            background-color: var(--primary-orange);
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 12px 35px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            flex-wrap: wrap;
+        }
+
+        .navbar a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: opacity 0.2s ease;
+        }
+
+        .navbar a:hover {
+            opacity: 0.7;
+        }
+
+        /* --- CONTENU PRINCIPAL --- */
+        .safety-container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px 20px 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- EN-TÊTE ET BANNIÈRE --- */
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: var(--primary-orange);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .milestone-banner {
+            width: 100%;
+            background-color: var(--card-bg);
+            border: 1px solid var(--outline-color);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .milestone-text {
+            color: var(--primary-orange);
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .intro-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-align: center;
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+
+        /* --- CARTES D'INFORMATION --- */
+        .info-sections-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--outline-color);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .card-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .card-list li {
+            font-size: 0.85rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: var(--text-light);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .card-list li::before {
+            content: '✓';
+            color: var(--primary-orange);
+            font-weight: 800;
+        }
+
+        /* --- CARTES DE LIVRAISON --- */
+        .shipping-cards-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .shipping-card {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-color: var(--primary-orange);
+            color: #000000;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .shipping-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(242, 140, 6, 0.4);
+        }
+
+        .shipping-card-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .shipping-card-info {
+            font-size: 0.85rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 900px) {
+            .info-sections-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .page-title {
+                font-size: 2.2rem;
+            }
+            .milestone-text {
+                font-size: 1.2rem;
+            }
+            .navbar {
+                gap: 12px;
+                padding: 10px 15px;
+            }
+            .navbar a {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .page-title {
+                font-size: 1.8rem;
+            }
+            .milestone-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html">Accueil</a>
+            <a href="yescard.html">YesCard</a>
+            <a href="reviewy.html">Avis Clients</a>
+        </nav>
+    </header>
+
+    <main class="safety-container">
+        
+        <section class="page-header">
+            <h1 class="page-title">Conçu pour la sécurité</h1>
+        </section>
+        
+        <div class="milestone-banner">
+            <span class="milestone-text" id="order-counter">0+ COMMANDES LIVRÉES</span>
+        </div>
+        
+        <p class="intro-text">
+            Votre sécurité, votre confidentialité et votre satisfaction sont nos priorités absolues. Nous garantissons une expédition sûre et confidentielle avec des garanties fiables.
+        </p>
+
+        <section class="info-sections-grid">
+            
+            <div class="info-card">
+                <h2 class="card-title">Livraison Mondial Relay</h2>
+                <ul class="card-list">
+                    <li>Expédition internationale (Europe) entièrement sécurisée, confidentielle et fiable.</li>
+                    <li>Plus de 5 000 colis expédiés en toute sécurité avec des transporteurs de confiance, toujours de manière discrète et sans tracas.</li>
+                    <li>Chaque colis comprend un suivi pour une transparence totale et une confiance optimale de nos clients.</li>
+                </ul>
+                
+                <div class="shipping-cards-container">
+                    <div class="shipping-card">
+                        <span class="shipping-card-title">Mondial Relay - Point Relais</span>
+                        <p class="shipping-card-info">
+                            Tarif : 10 €<br>
+                            Délai de livraison : 2 à 4 jours (Retrait dans le point relais de votre choix)
+                        </p>
+                    </div>
+                    
+                    <div class="shipping-card">
+                        <span class="shipping-card-title">Mondial Relay - Livraison à Domicile</span>
+                        <p class="shipping-card-info">
+                            Tarif : 15 €<br>
+                            Délai de livraison : 3 à 5 jours (Livraison directe chez vous)
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h2 class="card-title">Garanties de Livraison & Sécurité</h2>
+                <ul class="card-list">
+                    <li>Livraison mondiale entièrement sécurisée, confidentielle et digne de confiance.</li>
+                    <li>Un service rapide et professionnel.</li>
+                    <li>Billets de banque réalistes et de haute qualité.</li>
+                    <li>Expédition internationale sécurisée — un emballage discret et des transporteurs de confiance garantissent une réception sans encombre.</li>
+                    <li>Système de suivi en ligne fiable.</li>
+                    <li>Un service client sur lequel vous pouvez compter.</li>
+                </ul>
+            </div>
+
+        </section>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const counterElement = document.getElementById("order-counter");
+            const targetValue = 5000;
+            const duration = 2000; // Durée de l'animation en millisecondes (2 secondes)
+            
+            let startTime = null;
+
+            function animateCounter(currentTime) {
+                if (!startTime) startTime = currentTime;
+                const progress = currentTime - startTime;
+                
+                // Calcul de la progression linéaire
+                const currentValue = Math.min(Math.floor((progress / duration) * targetValue), targetValue);
+                
+                // Injection de la valeur dynamique dans le texte en français
+                counterElement.textContent = `${currentValue}+ COMMANDES LIVRÉES`;
+
+                if (progress < duration) {
+                    requestAnimationFrame(animateCounter);
+                }
+            }
+
+            // Lancement de l'animation optimisée pour le rafraîchissement d'écran (60fps+)
+            requestAnimationFrame(animateCounter);
+        });
+    </script>
+</body>
+</html>

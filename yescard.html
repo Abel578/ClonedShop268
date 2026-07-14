@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloned Shop - Catalogue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* --- RESET & VARIABLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        :root {
+            --primary-orange: #f28c06;
+            --telegram-blue: #0088cc;
+            --telegram-blue-hover: #0077b5;
+            --dark-bg: #140b03;
+            --card-bg: rgba(20, 11, 3, 0.85);
+            --text-light: #ffffff;
+            --text-muted: #cdbeaf;
+            --outline-color: rgba(242, 140, 6, 0.3);
+            --overlay-bg: rgba(0, 0, 0, 0.85);
+        }
+
+        body {
+            background-image: url('Gemini_Generated_Image_uxoxecuxoxecuxox.png'); 
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: var(--text-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 60px;
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            z-index: 10;
+        }
+
+        .navbar {
+            background-color: var(--primary-orange);
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            padding: 12px 35px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            flex-wrap: wrap;
+        }
+
+        .navbar a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            transition: opacity 0.2s ease;
+        }
+
+        .navbar a:hover {
+            opacity: 0.7;
+        }
+
+        /* --- TITLE --- */
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-orange);
+            margin: 40px 0 10px 0;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .page-subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-align: center;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        /* --- CATALOGUE GRID --- */
+        .catalog-container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--outline-color);
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-orange);
+        }
+
+        /* CARD HEADER & IMAGE */
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 12px;
+        }
+
+        .product-name {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-orange);
+            text-transform: uppercase;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: var(--primary-orange);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        .product-image-box {
+            width: 100%;
+            height: 180px;
+            background: #23170c;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .product-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* CHARACTERISTICS */
+        .specs-list {
+            list-style: none;
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .specs-list li {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-light);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .specs-list li span {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .specs-list li::before {
+            content: '📌';
+            font-size: 0.9rem;
+        }
+        
+        .specs-list li.detail-item::before {
+            content: '💰';
+        }
+
+        /* BUTTONS ACTIONS CONTAINER */
+        .product-actions {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        /* ACTION BUTTONS */
+        .btn-video, .btn-order {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        .btn-video {
+            background-color: transparent;
+            border: 2px solid var(--primary-orange);
+            color: var(--primary-orange);
+        }
+
+        .btn-video:hover {
+            background-color: var(--primary-orange);
+            color: #000000;
+            box-shadow: 0 4px 15px rgba(242, 140, 6, 0.3);
+        }
+
+        .btn-order {
+            background-color: var(--telegram-blue);
+            border: 2px solid var(--telegram-blue);
+            color: #ffffff;
+        }
+
+        .btn-order:hover {
+            background-color: var(--telegram-blue-hover);
+            border-color: var(--telegram-blue-hover);
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.4);
+        }
+
+        /* --- POP-UP MODAL VIDEO --- */
+        .video-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--overlay-bg);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 20px;
+        }
+
+        .video-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: #1c1107;
+            border: 1px solid var(--primary-orange);
+            width: 100%;
+            max-width: 700px;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            overflow: hidden;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: color 0.2s ease;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--primary-orange);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* Ratio 16:9 */
+            height: 0;
+        }
+
+        .video-wrapper video, .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .catalog-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .page-title {
+                font-size: 2rem;
+            }
+            .product-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="index.html">Acceuil</a>
+            <a href="buildy.html">A propos</a>
+            <a href="reviewy.html">Retours Client</a>
+        </nav>
+    </header>
+
+    <h1 class="page-title">YesCard</h1>
+    <p class="page-subtitle">Les yescard sont des cartes bancaires clonées utilisant les données bancaires de gros comptes a l'étranger.Je vend les meilleures du marcher noir russes mes retours parlent d'eux memes</p>
+
+    <main class="catalog-container">
+        
+        <!-- PRODUIT 1: CLASSIC VISA -->
+        <article class="product-card">
+            <div>
+                <div class="product-header">
+                    <h2 class="product-name">Classic Visa 💳</h2>
+                    <span class="product-price">300€</span>
+                </div>
+                <div class="product-image-box">
+                    <img src="Gemini_Generated_Image_et7hlnet7hlnet7h.png" alt="Classic Visa">
+                </div>
+                <ul class="specs-list">
+                    <li>Prix : <span>300€</span></li>
+                    <li class="detail-item">Detail : <span>Plafond 8 000€</span></li>
+                    <li class="detail-item">Retrait : <span>1 000€/jrs</span></li>
+                    <li class="detail-item">Validité : <span>45 jrs à compter du premier retrait</span></li>
+                </ul>
+            </div>
+            <div class="product-actions">
+                <button class="btn-video" data-video="4_5836713078971963814.mp4">▶ Vidéo</button>
+                <a href="https://t.me/le_dux0" target="_blank" class="btn-order">✈ Commander</a>
+            </div>
+        </article>
+
+        <!-- PRODUIT 2: CLASSIC MASTERCARD -->
+        <article class="product-card">
+            <div>
+                <div class="product-header">
+                    <h2 class="product-name">Classic Mastercard 💳</h2>
+                    <span class="product-price">600€</span>
+                </div>
+                <div class="product-image-box">
+                    <img src="Gemini_Generated_Image_5bipxj5bipxj5bip.png" alt="Classic Mastercard">
+                </div>
+                <ul class="specs-list">
+                    <li>Prix : <span>600€</span></li>
+                    <li class="detail-item">Detail : <span>Plafond 18 000€</span></li>
+                    <li class="detail-item">Retrait : <span>1 500€/jrs</span></li>
+                    <li class="detail-item">Validité : <span>60 jrs à compter du premier retrait</span></li>
+                </ul>
+            </div>
+            <div class="product-actions">
+                <button class="btn-video" data-video="4_5888723805781629292.MP4">▶ Vidéo</button>
+                <a href="https://t.me/le_dux0" target="_blank" class="btn-order">✈ Commander</a>
+            </div>
+        </article>
+
+        <!-- PRODUIT 3: GOLD MASTERCARD -->
+        <article class="product-card">
+            <div>
+                <div class="product-header">
+                    <h2 class="product-name">Gold Mastercard 💳</h2>
+                    <span class="product-price">700€</span>
+                </div>
+                <div class="product-image-box">
+                    <img src="Gemini_Generated_Image_lzbhhxlzbhhxlzbh.png" alt="Gold Mastercard">
+                </div>
+                <ul class="specs-list">
+                    <li>Prix : <span>700€</span></li>
+                    <li class="detail-item">Detail : <span>Plafond 20 000€</span></li>
+                    <li class="detail-item">Retrait : <span>2 500€/jrs</span></li>
+                    <li class="detail-item">Validité : <span>60 jrs à compter du premier retrait</span></li>
+                </ul>
+            </div>
+            <div class="product-actions">
+                <button class="btn-video" data-video="2_5312384150081137595.MP4">▶ Vidéo</button>
+                <a href="https://t.me/le_dux0" target="_blank" class="btn-order">✈ Commander</a>
+            </div>
+        </article>
+
+        <!-- PRODUIT 4: PLATINIUM MASTERCARD -->
+        <article class="product-card">
+            <div>
+                <div class="product-header">
+                    <h2 class="product-name">Platinium Mastercard 💳</h2>
+                    <span class="product-price">1000€</span>
+                </div>
+                <div class="product-image-box">
+                    <img src="watermarked_img_15074425828023244364.jpg" alt="Platinium Mastercard">
+                </div>
+                <ul class="specs-list">
+                    <li>Prix : <span>1000€</span></li>
+                    <li class="detail-item">Detail : <span>Plafond 25 000€</span></li>
+                    <li class="detail-item">Retrait : <span>3 000€/jrs</span></li>
+                    <li class="detail-item">Validité : <span>90 jrs à compter du premier retrait</span></li>
+                </ul>
+            </div>
+            <div class="product-actions">
+                <button class="btn-video" data-video="1_5150228037777753283.MP4">▶ Vidéo</button>
+                <a href="https://t.me/le_dux0" target="_blank" class="btn-order">✈ Commander</a>
+            </div>
+        </article>
+
+    </main>
+
+    <!-- STRUCTURE UNIQUE DU POP-UP / MODAL VIDEO -->
+    <div class="video-modal" id="videoModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <div class="video-wrapper">
+                <video id="modalVideo" controls controlsList="nodownload">
+                    <source src="" type="video/mp4">
+                    Votre navigateur ne supporte pas le lecteur vidéo.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS GESTION DU POP-UP VIDEO -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('videoModal');
+            const modalVideo = document.getElementById('modalVideo');
+            const closeModalBtn = document.getElementById('closeModal');
+            const videoButtons = document.querySelectorAll('.btn-video');
+
+            videoButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const videoSrc = button.getAttribute('data-video');
+                    modalVideo.src = videoSrc;
+                    modal.classList.add('active');
+                    modalVideo.play();
+                });
+            });
+
+            function closeModal() {
+                modal.classList.remove('active');
+                modalVideo.pause();
+                modalVideo.currentTime = 0;
+                modalVideo.src = "";
+            }
+
+            closeModalBtn.addEventListener('click', closeModal);
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
